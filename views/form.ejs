@@ -9,19 +9,34 @@
 <body>
     <h2>Personal Information Form</h2>
     <form action="/submit-form" method="POST">
-        <label for="firstName">First Name:</label><br>
-        <input type="text" id="firstName" name="firstName" required><br><br>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br>
 
-        <label for="lastName">Last Name:</label><br>
-        <input type="text" id="lastName" name="lastName" required><br><br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br>
 
-        <label for="ssn">Social Security Number:</label><br>
-        <input type="text" id="ssn" name="ssn" required><br><br>
+        <label for="ssn">Social Security Number:</label>
+        <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required><br>
 
-        <label for="email">Email Address:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required><br>
 
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        // JavaScript to mask SSN input in the format XXX-XX-XXXX
+        document.getElementById('ssn').addEventListener('input', function () {
+            let ssn = this.value.replace(/\D/g, ''); // Remove non-digit characters
+            if (ssn.length > 3) {
+                ssn = ssn.slice(0, 3) + '-' + ssn.slice(3); // Add dash after first 3 digits
+            }
+            if (ssn.length > 6) {
+                ssn = ssn.slice(0, 6) + '-' + ssn.slice(6, 9); // Add dash after the next 2 digits
+            }
+            // Set the value back to the input with the formatted SSN
+            this.value = ssn;
+        });
+    </script>
 </body>
 </html>
